@@ -1,64 +1,271 @@
 
+
 <!DOCTYPE html>
+
 <html lang="my">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dream666</title>
+
+<title>Dream666 - 777 Demo</title>
+
 <style>
+
+* { box-sizing: border-box; }
+
 body {
+
   margin: 0;
+
   background: #101020;
+
   color: white;
+
   font-family: Arial, sans-serif;
+
   text-align: center;
+
 }
+
 header {
+
   background: #202040;
-  padding: 25px;
+
+  padding: 20px;
+
 }
-h1 { color: gold; font-size: 38px; }
-.card {
+
+h1 { color: gold; }
+
+.game {
+
   background: #29294a;
-  margin: 25px 15px;
-  padding: 25px;
-  border-radius: 15px;
+
+  margin: 30px 15px;
+
+  padding: 25px 15px;
+
+  border-radius: 20px;
+
 }
-a {
-  display: block;
-  background: gold;
-  color: black;
-  padding: 15px;
-  margin: 15px auto;
-  border-radius: 10px;
-  text-decoration: none;
+
+.slots {
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  margin: 30px 0;
+
+}
+
+.slot {
+
+  background: #fff;
+
+  color: #17172b;
+
+  width: 85px;
+
+  height: 100px;
+
+  border-radius: 12px;
+
+  font-size: 48px;
+
   font-weight: bold;
+
+  display: grid;
+
+  place-items: center;
+
 }
+
+button {
+
+  background: gold;
+
+  color: black;
+
+  border: none;
+
+  border-radius: 12px;
+
+  padding: 16px 45px;
+
+  font-size: 22px;
+
+  font-weight: bold;
+
+}
+
+button:disabled { opacity: .6; }
+
+#result {
+
+  font-size: 24px;
+
+  font-weight: bold;
+
+  margin: 25px 0;
+
+  min-height: 35px;
+
+}
+
+.note {
+
+  color: #ccc;
+
+  font-size: 13px;
+
+}
+
+.back {
+
+  display: inline-block;
+
+  color: gold;
+
+  margin: 20px;
+
+}
+
 </style>
+
 </head>
+
 <body>
+
 <header>
-<h1>Dream666</h1>
-<p>Welcome to our Website</p>
+
+<h1>🌟 Dream666 🌟</h1>
+
+<p>777 Demo Game</p>
+
 </header>
 
-<div class="card">
-<h2>🎮 Welcome</h2>
-<p>Dream666 Demo Website မှ ကြိုဆိုပါတယ်။</p>
-<a href="#game">Play Demo</a>
-<a href="#download">App Download</a>
+<div class="game">
+
+<h2>🎰 Lucky 777</h2>
+
+<p>SPIN ကိုနှိပ်ပြီး ကံစမ်းကြည့်ပါ</p>
+
+<div class="slots">
+
+<div class="slot" id="s1">7</div>
+
+<div class="slot" id="s2">7</div>
+
+<div class="slot" id="s3">7</div>
+
 </div>
 
-<div class="card" id="game">
-<h2>🎰 Demo Game</h2>
-<p>Coming Soon</p>
+<button id="spin" onclick="spin()">SPIN</button>
+
+<div id="result">Good Luck!</div>
+
+<p class="note">
+
+Demo Game သာဖြစ်သည်။ ငွေကြေးနှင့် လောင်းကြေးမပါဝင်ပါ။
+
+</p>
+
 </div>
 
-<div class="card" id="download">
-<h2>📱 Download</h2>
-<p>Coming Soon</p>
-</div>
+<a class="back" href="index.html">← Home ပြန်သွားမယ်</a>
 
-<p>Dream666 © 2026</p>
+<script>
+
+let busy = false;
+
+function spin() {
+
+  if (busy) return;
+
+  busy = true;
+
+  const button = document.getElementById("spin");
+
+  const result = document.getElementById("result");
+
+  const slots = [
+
+    document.getElementById("s1"),
+
+    document.getElementById("s2"),
+
+    document.getElementById("s3")
+
+  ];
+
+  button.disabled = true;
+
+  result.textContent = "လှည့်နေသည်...";
+
+  let count = 0;
+
+  const timer = setInterval(() => {
+
+    slots.forEach(slot => {
+
+      slot.textContent = Math.floor(Math.random() * 10);
+
+    });
+
+    count++;
+
+    if (count >= 15) {
+
+      clearInterval(timer);
+
+      const numbers = [
+
+        Math.floor(Math.random() * 10),
+
+        Math.floor(Math.random() * 10),
+
+        Math.floor(Math.random() * 10)
+
+      ];
+
+      slots.forEach((slot, i) => {
+
+        slot.textContent = numbers[i];
+
+      });
+
+      if (numbers.every(n => n === 7)) {
+
+        result.textContent = "🎉 JACKPOT! 777 🎉";
+
+        result.style.color = "gold";
+
+      } else {
+
+        result.textContent = "TRY AGAIN!";
+
+        result.style.color = "white";
+
+      }
+
+      button.disabled = false;
+
+      busy = false;
+
+    }
+
+  }, 100);
+
+}
+
+</script>
+
 </body>
+
 </html>
